@@ -19,6 +19,9 @@ curl -s https://api.github.com/repos/neovim/neovim-releases/releases/latest \
 sudo apt install -y ./nvim-linux-x86_64.deb
 rm -f nvim-linux-x86_64.deb
 
-# Install remaining tools
+# Install remaining tools (build-essential for gcc and make)
 sudo apt update
+sudo apt install -y build-essential
 sudo apt install -y tmux ripgrep
+
+Why 
