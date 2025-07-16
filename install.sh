@@ -15,6 +15,9 @@ sudo apt remove -y neovim
 status=$?
 echo "Done: removing, exit status: ${status}"
 
+# For helping to determine errors.
+set -o pipefail
+
 # Fetch latest .deb from neovim‑releases
 curl -s https://api.github.com/repos/neovim/neovim-releases/releases/latest \
   | grep "browser_download_url.*nvim-linux-x86_64.deb" \
@@ -23,6 +26,7 @@ curl -s https://api.github.com/repos/neovim/neovim-releases/releases/latest \
 
 status=$?
 echo "Done: getting new deb, exit status: ${status}"
+echo "Pipeline statuses: ${PIPESTATUS[*]}"
 
 # Install it
 sudo apt install -y ./nvim-linux-x86_64.deb
