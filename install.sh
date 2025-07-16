@@ -6,7 +6,19 @@ mkdir -p "$HOME/.config"
 cp -r nvim "$HOME/.config/nvim"
 cp -r tmux "$HOME/.config/tmux"
 
+# Remove old version
 sudo apt remove -y neovim
-sudo add-apt-repository ppa:neovim-ppa/stable -y
+
+# Fetch latest .deb from neovim‑releases
+curl -s https://api.github.com/repos/neovim/neovim-releases/releases/latest \
+  | grep "browser_download_url.*nvim-linux-x86_64.deb" \
+  | cut -d '"' -f 4 \
+  | wget -qi -
+
+# Install it
+sudo apt install -y ./nvim-linux-x86_64.deb
+rm -f nvim-linux-x86_64.deb
+
+# Install remaining tools
 sudo apt update
-sudo apt install -y neovim tmux ripgrep
+sudo apt install -y tmux ripgrep
