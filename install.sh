@@ -6,4 +6,4 @@ mkdir -p "$HOME/.config"
 cp -r nvim "$HOME/.config/nvim"
 cp -r tmux "$HOME/.config/tmux"
 
-sudo apt install neovim tmux ripgrep
+sudo apt install -y neovim tmux ripgrep
