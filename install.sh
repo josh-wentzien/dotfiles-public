@@ -2,6 +2,9 @@
 
 # Script to install preferred tools
 
+# For helping to determine errors.
+set -euo pipefail
+
 mkdir -p "$HOME/.config"
 cp -r nvim "$HOME/.config/nvim"
 cp -r tmux "$HOME/.config/tmux"
@@ -15,15 +18,9 @@ sudo apt remove -y neovim
 status=$?
 echo "Done: removing, exit status: ${status}"
 
-# For helping to determine errors.
-set -o pipefail
 
 # Fetch latest .deb from neovim‑releases
-curl -s https://api.github.com/repos/neovim/neovim-releases/releases/latest \
-  | grep "browser_download_url.*nvim-linux-x86_64.deb" \
-  | cut -d '"' -f 4 \
-  | wget -qi -
-
+curl -s https://api.github.com/repos/neovim/neovim-releases/releases/latest | grep "browser_download_url.*nvim-linux-x86_64.deb" | cut -d '"' -f 4 | wget -qi -
 status=$?
 echo "Done: getting new deb, exit status: ${status}"
 echo "Pipeline statuses: ${PIPESTATUS[*]}"
